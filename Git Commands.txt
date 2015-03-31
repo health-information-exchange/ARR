@@ -1,0 +1,47 @@
+Git Commands [To be executed from the git directory]:
+
+--git 
+
+--gi help commandname [gets command documentation]
+
+--git init [create a new repository]
+	git init <directory>
+
+--git clone url [Creates a new directory in local file system and clones the data present.]
+
+--git status [Get current status]
+
+--git add "filename" [Adds to the local project [status changed from untracked to not committed]
+	git add . [Add everything in your current directory] [Any difference between this and the next one?]
+	git add -A [Add all]
+
+--git commit -m "message"
+Locking it to the repository [created but still on my machine, locked into the repository but still not present in the server]
+	git commit -a [will automatically notice any modified (but not new) files, add them to the index, and commit, all in one step.]
+
+--git push [sends changes to te server]
+	git push --set-upstream origin branchname [pushes the branchname back to the server.]
+
+--git pull [gets data from the server]
+
+--Escape :wq [To get out of any git message]
+
+--git branch [gets a list of all the branches we have]
+	git branch branchname [creates a new branch]
+	git branch -d branchname [deletes the branch]
+
+--git checkout branchname [switch to branch]
+
+--git merge branchname [merges the branchname to the current branch checked out]
+
+--git config --global user.name "Your Name Comes Here"
+
+--git config --global user.email you@yourdomain.example.com
+
+--git log [view history]
+	git log -p [to see complete diffs at each step]
+	git log --stat --summary [gets the overview of the change]
+	
+--git diff [shows he conflicts, If there are conflicts, markers will be left in the problematic files showing the conflict]
+
+--gitk [shows nice graphical representation of the resulting history]
