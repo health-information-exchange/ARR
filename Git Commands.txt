@@ -19,10 +19,14 @@ Git Commands [To be executed from the git directory]:
 Locking it to the repository [created but still on my machine, locked into the repository but still not present in the server]
 	git commit -a [will automatically notice any modified (but not new) files, add them to the index, and commit, all in one step.]
 
+--git remote add repo url
+
 --git push [sends changes to te server]
+	git push repo
 	git push --set-upstream origin branchname [pushes the branchname back to the server.]
 
 --git pull [gets data from the server]
+	git pull repos branchname
 
 --Escape :wq [To get out of any git message]
 
@@ -45,3 +49,4 @@ Locking it to the repository [created but still on my machine, locked into the r
 --git diff [shows he conflicts, If there are conflicts, markers will be left in the problematic files showing the conflict]
 
 --gitk [shows nice graphical representation of the resulting history]
+
