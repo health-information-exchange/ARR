@@ -31,6 +31,8 @@ Locking it to the repository [created but still on my machine, locked into the r
 --Escape :wq [To get out of any git message]
 
 --git branch [gets a list of all the branches we have]
+
+--git rm "filename" [delete file]
 	git branch branchname [creates a new branch]
 	git branch -d branchname [deletes the branch]
 
