@@ -1,0 +1,193 @@
+html 
+{
+	height:100%;
+    font-family: 'myHelvetica', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #333333;
+}
+	
+body {
+	position: absolute; 
+	top: 0; 
+	bottom: 0; 
+	right: 0; 
+	left: 0;
+	margin: 0;
+}
+
+.header
+{
+	height: 7%;
+	width: 100%;
+    line-height:75%;
+	background-color: #ffffff;
+}
+
+.header h2, h4, h3, img {
+	vertical-align: middle;
+}
+
+.container{		
+	height: 93%;
+	width: 100%;
+	overflow: hidden;
+}
+
+.nav{
+	width: 15%;
+	height: 100%;
+	float: left;
+    background-color:#C1C9D0;
+}
+
+.content{
+	width: 85%;
+	height: 100%;
+	float:left;
+	background-color: #EAF2F6 !important;    
+}
+
+.innerContent{
+	width: 99%;
+	height: 99%;
+	float: left;	
+	overflow: auto;
+    margin-left: 5px;    
+}
+
+.innerSubContent {
+    width: 100%;
+    height:95%;
+}
+
+.innerSubContentWithoutHeight {
+    width: 100%;
+}
+
+.message { width:99%; height:100%; text-wrap:normal; }
+
+.querymessage { width:99%; height:150px; text-wrap:normal; }
+
+.result {
+    width:99%;    
+    background-color:#8997A5;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 20px;
+    -moz-border-radius: 15px;
+    padding: 5px;
+}
+
+.result tbody tr:hover { cursor: pointer; background-color: #6B7D8F !important; }
+
+.result th, td {
+    text-align:justify;
+    width:auto;
+}
+
+.table, .tableWithHover {
+    width:100%;    
+    background-color:#E6E6E6;
+    border-collapse: separate;
+    border-spacing: 0;    
+    padding: 5px;
+    text-align:left;
+    border: 1px solid #d2d2d2;
+}
+
+.tableWithHover tr a {opacity: 0;}
+.tableWithHover tr:hover a {opacity:1}
+
+.content input, select {
+    
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    padding: 2px;
+}
+
+.content button:hover { background-color:#939393; }
+
+.innerContent div table label {
+    font-size: small;
+}
+
+.views { 
+    list-style-type: none; 
+    padding: 0;
+    margin: 0; 
+	margin: 10px 0 16px 0;
+	font-size: 0px;
+}
+
+.views li:hover 
+{
+    background-color: #f5f8fa;
+    font-style:italic;
+    background-image:none;
+}
+
+.views li {     
+    font-size: 14px; 
+    display: block;
+    padding: 0.5em 1.5em; 
+    cursor: pointer;     
+    background-color:#D0D6DB;
+    border: 1px solid transparent;
+    background-image: -webkit-linear-gradient(top, #dee2e6 0%, #c1c9d0 100%);
+}
+
+.views li { *display: inline !important; } /* IE7 only */
+
+.views li::selection
+{ 
+    background-color: #eaf2f6 !important;
+}
+
+.nav .selected { 
+	background-color: #EAF2F6 !important; 
+	background-image:none;
+} 
+
+.content button {
+  width: 70px;
+  height: 25px;
+  background-color: #B8B8B8;  
+  border: 1px solid #696969;
+}
+
+.tabs {
+    width: 100%;
+}
+
+.tabPane{
+    width:100%;
+    height:88%;
+}
+
+.isVisible {
+    display: inline;
+}
+
+.isHidden {
+    display: none;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212,212,212);
+    width:1130px;
+    height: 82%;
+}
+
+.checkBox {
+    position: relative;
+    vertical-align: middle;
+    bottom: 2px;
+}
+
+.checkBoxLabel {
+    position: relative;
+    vertical-align: middle;
+    bottom: 2px;
+}

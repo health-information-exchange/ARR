@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{44B9AE17-1982-4ECB-8C8C-20AEC0F900B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Perceptive.ARR.DataModel</RootNamespace>
+    <AssemblyName>Perceptive.ARR.DataModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accession.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActiveParticipant.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActorElement.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppSetting.cs">
+      <DependentUpon>RepositoryConfiguration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuditSourceIdentification.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientUser.cs">
+      <DependentUpon>RepositoryConfiguration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseConnector.cs" />
+    <Compile Include="EventIdentification.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Instance.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvalidLog.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogRecorder.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectDetailElement.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectIdentifier.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipantObjectContainsStudy.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipantObjectDescription.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipantObjectIdentification.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryConfiguration.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositoryConfiguration.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositoryConfiguration.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositoryConfiguration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositoryConfiguration.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositoryConfiguration.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="RepositoryData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositoryData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositoryData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RepositoryData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepositoryData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SOPClass.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+	<Compile Include="SupportedActorElement.cs">
+      <DependentUpon>RepositoryConfiguration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupportedEventType.cs">
+      <DependentUpon>RepositoryConfiguration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserActiveDatabase.cs">
+      <DependentUpon>RepositoryConfiguration.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ValidLog.cs">
+      <DependentUpon>RepositoryData.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="RepositoryData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RepositoryData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="RepositoryConfiguration.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RepositoryConfiguration.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="RepositoryConfiguration.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RepositoryConfiguration.edmx</DependentUpon>
+      <LastGenOutput>RepositoryConfiguration.Context.cs</LastGenOutput>
+    </None>
+    <None Include="RepositoryConfiguration.edmx.diagram">
+      <DependentUpon>RepositoryConfiguration.edmx</DependentUpon>
+    </None>
+    <None Include="RepositoryConfiguration.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RepositoryConfiguration.edmx</DependentUpon>
+      <LastGenOutput>RepositoryConfiguration.cs</LastGenOutput>
+    </None>
+    <None Include="RepositoryData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RepositoryData.edmx</DependentUpon>
+      <LastGenOutput>RepositoryData.Context.cs</LastGenOutput>
+    </None>
+    <None Include="RepositoryData.edmx.diagram">
+      <DependentUpon>RepositoryData.edmx</DependentUpon>
+    </None>
+    <None Include="RepositoryData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RepositoryData.edmx</DependentUpon>
+      <LastGenOutput>RepositoryData.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

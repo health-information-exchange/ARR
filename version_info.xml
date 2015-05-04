@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="build_version_os_info">
+
+  <condition property="isWindows">
+      <os family="windows"/>
+  </condition>
+  
+  <condition property="isWindows32">
+    <and>
+      <os family="windows"/>
+      <isset property="is32"/>
+    </and>
+  </condition>
+
+  <condition property="isWindows64">
+    <and>
+      <os family="windows"/>
+      <isset property="is64"/>
+    </and>
+  </condition>
+  
+  <!-- Bring in all the environment properties -->
+  <property environment="env"/>
+
+  <property name="version.major" value="0"/>
+  <property name="version.minor" value="0"/>
+  <property name="version.revision" value="0"/>
+
+  <condition property="version.build" value="${env.BUILD_NUMBER}" else="0">
+    <isset property="env.BUILD_NUMBER"/>
+  </condition>
+
+  <property name="version.release" value="${version.major}.${version.minor}.${version.revision}"/>
+  <property name="version.full" value="${version.major}.${version.minor}.${version.revision}.${version.build}"/>
+
+  <tstamp>
+    <format property="build.date" pattern="MM/dd/yyyy"/>
+  </tstamp>
+
+  <macrodef name="updatebuildnumber-csharp">
+    <attribute name="file.name"/>
+    <sequential>
+      <echo message="Updating Build Number in - @{file.name}"/>
+      <attrib file="@{file.name}" readonly="false"/>
+      <replaceregexp  file="@{file.name}"
+                      match='\[assembly: AssemblyVersion\("(.*)"\)\]'
+                      replace='\[assembly: AssemblyVersion\("${version.full}"\)\]'
+                      byline='true'/>
+
+      <replaceregexp  file="@{file.name}"
+                      match='\[assembly: AssemblyFileVersion\("(.*)"\)\]'
+                      replace='\[assembly: AssemblyFileVersion\("${version.full}"\)\]'
+                      byline='true'/>
+      
+      <attrib file="@{file.name}" readonly="true"/>
+    </sequential>
+  </macrodef>
+  
+</project>

@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="Perceptive.ARR" default="dev">
+
+  <!-- TODO: Clean up this file. Setup specific copy statements to copy the project DLLs to live dire3ctly beneath project forlders instead of a couple of levels down. -->
+
+
+  <import file="version_info.xml"/>
+  <property name="proj.dir" value="."/>
+  
+  <target name="init">
+    <!-- Bring in all the environment properties -->
+    <property environment="env"/>
+    <property name="src.dir" value="."/>    
+    <property name="build.dir" location="${proj.dir}/build_out" />
+    <!-- get a time stamp for the unit test log file.-->
+    <tstamp>
+      <format property="current.time" pattern="yyyyMMdd_HHmmss" />
+    </tstamp>
+
+    <!-- set the src.dir -->
+    <condition property="src.dir" value="${env.WORKSPACE}">
+      <isset property="env.WORKSPACE"/>
+    </condition>
+
+    <condition property="src.dir" value="${env.SRC_DIR}">
+      <isset property="env.SRC_DIR"/>
+    </condition>
+
+    <!-- Installer root dir -->
+    <condition property="proj.dir" value="${env.ARR_PARENT}">
+      <isset property="env.ARR_PARENT"/>
+    </condition>
+    
+    <fail message="The source directory has not been set, set the env variable 'SRC_DIR' before running the build.xml" unless="src.dir"/>
+
+    <!-- set the build output directory -->
+    <!--  This is where Jenkins will look for build outputs, very import to copy exec, pdbs, installers, etc -->
+    <property name="build.output.dir" value="${src.dir}/build_out"/>
+    <property name="build.output.bin.dir" value="${build.output.dir}/bin"/>   
+    <property name="build.output.pdb.dir" value="${build.output.dir}/pdb"/>
+	
+    <!-- directories for installer  -->
+    <property name="installer.creation.dir" value="${proj.dir}/install"/>
+    <property name="build.installers.dir" value="${proj.dir}/Installer"/>
+    <condition value="${env.INSTALLSHIELD_2012}" property="INSTALLER_CMD" else="C:\Program Files (x86)\InstallShield\2013\System\IsCmdBld.exe">
+      <isset property="env.INSTALLSHIELD_2012"/>
+    </condition>
+   
+  </target>
+
+  <target name="clean" depends="init">
+	  <delete dir="${build.output.dir}"/>
+  </target>
+
+  <target name="mkdir" depends="clean">
+    <mkdir dir="${build.output.dir}"/>
+    <mkdir dir="${build.output.bin.dir}"/>
+    <mkdir dir="${build.output.pdb.dir}"/>  
+  </target>
+
+  <target name="build" depends="mkdir">
+    <!-- use the exec task to call msbuild and input your solution project -->
+    <msbuild proj.dir="${src.dir}/" proj.file="Perceptive.ARR.sln" build.target="Build" build.config="${build.config}" build.platform="Any CPU" build.verbosity="Normal"/>
+
+    <!-- write permission for build bin-->
+    <!--<chmod dir="${build.output.dir}" perm="777"/>-->
+    
+    <!-- Copy all dll and bin to build bin-->
+    <copy todir="${build.output.bin.dir}">
+      <fileset dir="${src.dir}">
+        <include name="**/*.dll" />
+        <include name="**/*.exe" />
+        <include name="**/*.xml" />
+        <include name="**/*.config" />
+        <include name="**/*.manifest" />
+        <exclude name="**/Installer" />
+        <exclude name="**/build.xml" />
+        <exclude name="**/version_info.xml"/>
+        <include name="**/*.bat" />
+        <include name="**/*.bak" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="tfslabel" depends="init" if="isRunningInJenkins">
+
+    <exec executable="tf" dir="${src.dir}">
+      <arg value="label"/>
+      <arg value="CI Build - ${version.full}"/>
+      <arg value="."/>
+      <arg value="-recursive"/>
+      <arg value="-login:pvi0\inow,${env.tfspasswd}"/>
+    </exec>
+
+  </target>
+
+  <target name="prod-props">
+    <property name="build.config" value="Release"/>
+  </target>
+
+  <target name="dev-props">
+    <property name="build.config" value="Release"/>
+  </target>
+
+  <!-- When not longer in development branch remove the checkin_merge_module -->
+  <!-- CI will call the prod target -->
+  <target name="prod" depends="prod-props,tfslabel,build, build-installers"/>
+
+  <!-- target if you want just for development testing and not do installers or copying-->
+  <target name="dev" depends="dev-props,build, build-installers"/>
+
+  <!-- Msbuild commandline executation -->
+  <!-- build.target can be Build or Rebuild -->
+  <!-- build.verbosity = quiet, minimal, normal, detailed, and diagnostic -->
+  <!-- build.other.prop = other properties to pass to msbuild -->
+  <!--                     be in format of property=value     -->
+  <!--                     If defining more than one property add ; between them -->
+  <macrodef name="msbuild">
+    <attribute name="proj.dir"/>
+    <attribute name="proj.file"/>
+    <attribute name="build.target" default="Build"/>
+    <attribute name="build.config"/>
+    <attribute name="build.platform"/>
+    <attribute name="build.verbosity" default="normal"/>
+    <attribute name="tools.version" default="4.0"/>
+
+    <sequential>
+      <!-- /maxcpucount[N] - number of cpu cores to use when N is left off uses max number -->
+      <!-- /verbosity:[quiet|minimal|normal|detailed|diagnostic] - build log level -->
+      <!-- /toolsversion:[2.0|3.5|4.0|etc] - build tool version -->
+      <exec executable="MSBuild.exe" dir="${src.dir}/" failonerror="true">
+        <arg value="@{proj.file}"/>
+        <arg value="/target:@{build.target}"/>
+        <arg value="/property:Configuration=@{build.config}"/>
+        <arg value="/property:Platform=@{build.platform}"/>
+        <arg value="/verbosity:@{build.verbosity}"/>
+        <arg value="/maxcpucount:1"/>
+        <arg value="/toolsversion:@{tools.version}"/>
+      </exec>
+    </sequential>
+  </macrodef>
+
+  <target name="build-installers">
+    <property name="INSTALL_DIR" value="${installer.creation.dir}"/>
+    <delete failonerror="false" quiet="true" includeemptydirs="true">
+      <fileset dir="${INSTALL_DIR}" includes="**/*"/>
+    </delete>
+    <mkdir dir="${INSTALL_DIR}"/>
+    <mkdir dir="${INSTALL_DIR}\ARR_Installer"/>
+    <mkdir dir="${INSTALL_DIR}\ARR_Installer\Doc_Files"/>
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Script_Files"/>
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\DB_Files"/>
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Viewer_Files"/>
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\images"/>
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\scripts"/>
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\stylesheets"/>
+	<!--<mkdir dir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\fonts"/>-->
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\bin"/>
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Service_Files"/>
+  <mkdir dir="${INSTALL_DIR}\ARR_Installer\Service_Files\Database"/> 
+	<mkdir dir="${INSTALL_DIR}\ARR_Installer\Graphics_Files"/>  
+
+    <!--Copy files to folders-->
+	  
+	<copy todir="${INSTALL_DIR}\ARR_Installer" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Installer/ARR_Server_Services" includes="*.ism"/>
+    </copy>
+	  
+	<copy todir="${INSTALL_DIR}\ARR_Installer\Doc_Files" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Installer/Doc" includes="*.rtf"/>
+    </copy>
+
+    <copy todir="${INSTALL_DIR}\ARR_Installer\Script_Files" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Installer/ARR_Server_Services/Script Files" includes="*.rul"/>
+    </copy>
+
+    <copy todir="${INSTALL_DIR}\ARR_Installer\DB_Files" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/DB_Scripts" includes="*.sql"/>
+    </copy>
+
+    <copy todir="${INSTALL_DIR}\ARR_Installer\Viewer_Files" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Perceptive.SPA.ARRViewer" includes="*.aspx"/>
+    </copy>
+	  
+	<copy todir="${INSTALL_DIR}\ARR_Installer\Viewer_Files" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Perceptive.SPA.ARRViewer" includes="*.config"/>
+    </copy>
+	  
+	<copy todir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\images" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Perceptive.SPA.ARRViewer/images" includes="*.*"/>
+    </copy>
+		
+	<copy todir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\scripts" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Perceptive.SPA.ARRViewer/scripts" includes="*.*"/>
+    </copy>
+		
+	<copy todir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\stylesheets" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Perceptive.SPA.ARRViewer/stylesheets" includes="*.*"/>
+    </copy>
+		
+	<!--<copy todir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\fonts" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Perceptive.SPA.ARRViewer/fonts" includes="*.*"/>
+    </copy>-->
+		
+	<copy todir="${INSTALL_DIR}\ARR_Installer\Viewer_Files\bin" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Perceptive.SPA.ARRViewer/bin" includes="*.*"/>
+    </copy>	
+
+    <copy todir="${INSTALL_DIR}\ARR_Installer\Service_Files" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/build_out/bin/Perceptive.ARR.Service.Installer/bin/Release" includes="*.*"/>
+    </copy>
+
+    <copy todir="${INSTALL_DIR}\ARR_Installer\Service_Files\Database" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/build_out/bin/Perceptive.ARR.Service.Installer/bin/Release/Database" includes="*.bak"/>
+    </copy>
+
+    <copy todir="${INSTALL_DIR}\ARR_Installer\Graphics_Files" verbose="true" overwrite="true">
+      <fileset dir="${proj.dir}/Installer/Graphics" includes="*.*"/>
+    </copy>    
+    <!--Build Installer-->
+    
+    <property name="ARR_SERVICE_RELEASE" value="RELEASE_ARR_SERVICE" />
+    <property name="ARR_SERVICE_CFG" value="ARR_SERVICE_CFG" />
+    <property name="ARR_SERVICE_ISM_LOCATION" value="${INSTALL_DIR}\ARR_Installer" />
+    <property name="ARR_SERVICE_ISM_NAME" value="ARRManager.ism" />
+    <property name="ARR_SERVICE_INSTALLER_LOC" value="${ARR_SERVICE_ISM_LOCATION}/${ARR_SERVICE_CFG}/${ARR_SERVICE_RELEASE}/DiskImages/DISK1" />
+    <property name="ARR_SERVICE_INSTALLER_NAME" value="PerceptiveARRManagerInstaller" />    
+
+    <attrib file="${ARR_SERVICE_ISM_LOCATION}/${ARR_SERVICE_ISM_NAME}" readonly="false"/>
+    <exec dir="${ARR_SERVICE_ISM_LOCATION}" executable="${INSTALLER_CMD}" failonerror="false">
+      <arg line="-p ${ARR_SERVICE_ISM_NAME}"/>
+      <arg line="-r ${ARR_SERVICE_RELEASE}"/>
+      <arg line="-c COMP"/>
+      <arg line="-e y"/>
+      <arg line="-v"/>
+      <arg line="-x"/>
+      <env path="${proj.dir}\" key="ARR_PARENT"/>
+    </exec>
+
+    <move	file="${ARR_SERVICE_INSTALLER_LOC}\${ARR_SERVICE_INSTALLER_NAME}.exe" 
+			tofile="${build.dir}\${ARR_SERVICE_INSTALLER_NAME}_${version.full}.exe" 
+			verbose="true" overwrite="true"/>
+    
+  </target>  
+ 
+  <!-- Define a shorter macro for calling an ant target in a separate build file -->
+  <macrodef name="call">
+    <attribute name="dir" description="Directory containing build.xml file to be called" />
+    <attribute name="target" description="Target within build.xml file to be invoked" />
+
+    <sequential>
+      <ant dir="@{dir}" antfile="build.xml" target="@{target}" inheritrefs="false" inheritall="false" />
+    </sequential>
+  </macrodef>
+
+</project>

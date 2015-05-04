@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PerceptiveARR_ConfigModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppSettings">
+          <Key>
+            <PropertyRef Name="AppSettingsID" />
+          </Key>
+          <Property Name="AppSettingsID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserRole" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupportedActorElement">
+          <Key>
+            <PropertyRef Name="ActorElementId" />
+          </Key>
+          <Property Name="ActorElementId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CodeSystemName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CodeDisplayName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UsedAt" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AllowLog" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupportedEventType">
+          <Key>
+            <PropertyRef Name="SupportedEventTypeID" />
+          </Key>
+          <Property Name="SupportedEventTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventTypeCode" Type="nvarchar(max)" />
+          <Property Name="EventTypeDisplayName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserActiveDatabase">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="ActiveDatabase" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PerceptiveARR_ConfigModelStoreContainer">
+          <EntitySet Name="AppSettings" EntityType="Self.AppSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientUser" EntityType="Self.ClientUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupportedActorElement" EntityType="Self.SupportedActorElement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupportedEventType" EntityType="Self.SupportedEventType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserActiveDatabase" EntityType="Self.UserActiveDatabase" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PerceptiveARR_ConfigModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppSetting">
+          <Key>
+            <PropertyRef Name="AppSettingsID" />
+          </Key>
+          <Property Name="AppSettingsID" Type="Guid" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientUser">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserRole" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupportedEventType">
+          <Key>
+            <PropertyRef Name="SupportedEventTypeID" />
+          </Key>
+          <Property Name="SupportedEventTypeID" Type="Guid" Nullable="false" />
+          <Property Name="EventTypeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EventTypeDisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="PerceptiveARR_ConfigEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppSettings" EntityType="Self.AppSetting" />
+          <EntitySet Name="ClientUsers" EntityType="Self.ClientUser" />
+          <EntitySet Name="SupportedEventTypes" EntityType="Self.SupportedEventType" />
+          <EntitySet Name="UserActiveDatabases" EntityType="PerceptiveARR_ConfigModel.UserActiveDatabase" />
+          <EntitySet Name="SupportedActorElements" EntityType="PerceptiveARR_ConfigModel.SupportedActorElement" />
+        </EntityContainer>
+        <EntityType Name="UserActiveDatabase">
+          <Key>            
+            <PropertyRef Name="UserName" />
+          </Key>          
+          <Property Name="ActiveDatabase" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SupportedActorElement">
+          <Key>
+            <PropertyRef Name="ActorElementId" />
+          </Key>
+          <Property Name="ActorElementId" Type="Guid" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodeSystemName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodeDisplayName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UsedAt" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AllowLog" Type="Boolean" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PerceptiveARR_ConfigModelStoreContainer" CdmEntityContainer="PerceptiveARR_ConfigEntities">
+          <EntitySetMapping Name="AppSettings">
+            <EntityTypeMapping TypeName="PerceptiveARR_ConfigModel.AppSetting">
+              <MappingFragment StoreEntitySet="AppSettings">
+                <ScalarProperty Name="AppSettingsID" ColumnName="AppSettingsID" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientUsers">
+            <EntityTypeMapping TypeName="PerceptiveARR_ConfigModel.ClientUser">
+              <MappingFragment StoreEntitySet="ClientUser">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupportedEventTypes">
+            <EntityTypeMapping TypeName="PerceptiveARR_ConfigModel.SupportedEventType">
+              <MappingFragment StoreEntitySet="SupportedEventType">
+                <ScalarProperty Name="SupportedEventTypeID" ColumnName="SupportedEventTypeID" />
+                <ScalarProperty Name="EventTypeCode" ColumnName="EventTypeCode" />
+                <ScalarProperty Name="EventTypeDisplayName" ColumnName="EventTypeDisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserActiveDatabases">
+            <EntityTypeMapping TypeName="PerceptiveARR_ConfigModel.UserActiveDatabase">
+              <MappingFragment StoreEntitySet="UserActiveDatabase">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ActiveDatabase" ColumnName="ActiveDatabase" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupportedActorElements">
+            <EntityTypeMapping TypeName="PerceptiveARR_ConfigModel.SupportedActorElement">
+              <MappingFragment StoreEntitySet="SupportedActorElement">
+                <ScalarProperty Name="AllowLog" ColumnName="AllowLog" />
+                <ScalarProperty Name="UsedAt" ColumnName="UsedAt" />
+                <ScalarProperty Name="CodeDisplayName" ColumnName="CodeDisplayName" />
+                <ScalarProperty Name="CodeSystemName" ColumnName="CodeSystemName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ActorElementId" ColumnName="ActorElementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

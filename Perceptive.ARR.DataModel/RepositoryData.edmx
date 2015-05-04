@@ -1,0 +1,1220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PerceptiveARRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accession">
+          <Key>
+            <PropertyRef Name="AccessionID" />
+          </Key>
+          <Property Name="AccessionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Number" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ActiveParticipant">
+          <Key>
+            <PropertyRef Name="ActiveParticipantID" />
+          </Key>
+          <Property Name="ActiveParticipantID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AlternativeUserID" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="UserIsRequestor" Type="bit" Nullable="false" />
+          <Property Name="RoleIDCode" Type="uniqueidentifier" />
+          <Property Name="NetworkAccessPointTypeCode" Type="nvarchar(max)" />
+          <Property Name="NetworkAccesPointID" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ActorElement">
+          <Key>
+            <PropertyRef Name="ActorElementID" />
+          </Key>
+          <Property Name="ActorElementID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ActorElementTypeID" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CodeSystemName" Type="nvarchar(max)" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AuditSourceIdentification">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AuditSourceID" Type="nvarchar(max)" />
+          <Property Name="AuditEnterpriseSiteID" Type="nvarchar(max)" />
+          <Property Name="Code" Type="nvarchar(max)" />
+          <Property Name="CodeSystemName" Type="nvarchar(max)" />
+          <Property Name="DisplayName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="EventIdentification">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="EventActionCode" Type="nvarchar(max)" />
+          <Property Name="EventDateTime" Type="nvarchar(max)" />
+          <Property Name="EventOutcomeIndicator" Type="nvarchar(max)" />
+          <Property Name="EventTypeCodeID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Instance">
+          <Key>
+            <PropertyRef Name="InstanceID" />
+          </Key>
+          <Property Name="InstanceID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SOPCLassID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="UID" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="InvalidLogs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Data" Type="varbinary(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LogRecorder">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RemoteIP" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LogDateTime" Type="datetime" Nullable="false" />
+          <Property Name="LogType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsValid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ObjectDetailElement">
+          <Key>
+            <PropertyRef Name="ObjectDetailElementID" />
+          </Key>
+          <Property Name="ObjectDetailElementID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectIdentificationID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="Value" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ObjectIdentifier">
+          <Key>
+            <PropertyRef Name="ObjectIdentifierID" />
+          </Key>
+          <Property Name="ObjectIdentifierID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="uniqueidentifier" />
+          <Property Name="ParticipantObjectContainsStudyID" Type="uniqueidentifier" />
+          <Property Name="ObjectIdentifierType" Type="int" Nullable="false" />
+          <Property Name="UID" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ParticipantObjectContainsStudy">
+          <Key>
+            <PropertyRef Name="ParticipantObjectContainsStudyID" />
+          </Key>
+          <Property Name="ParticipantObjectContainsStudyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ParticipantObjectDescription">
+          <Key>
+            <PropertyRef Name="ParticipantObjectDescriptionID" />
+          </Key>
+          <Property Name="ParticipantObjectDescriptionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectIdentificationID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Encrypted" Type="bit" />
+          <Property Name="Anonymized" Type="bit" />
+        </EntityType>
+        <EntityType Name="ParticipantObjectIdentification">
+          <Key>
+            <PropertyRef Name="ParticipantObjectIdentificationID" />
+          </Key>
+          <Property Name="ParticipantObjectIdentificationID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectTypeCode" Type="nvarchar(max)" />
+          <Property Name="ParticipantObjectTypeCodeRole" Type="nvarchar(max)" />
+          <Property Name="ParticipantObjectDataLifeCycle" Type="nvarchar(max)" />
+          <Property Name="ParticipantObjectIDTypeCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectSensitivity" Type="nvarchar(max)" />
+          <Property Name="ParticipantObjectID" Type="nvarchar(max)" />
+          <Property Name="ParticipantObjectName" Type="nvarchar(max)" />
+          <Property Name="ParticipantObjectQuery" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SOPClass">
+          <Key>
+            <PropertyRef Name="SOPClassID" />
+          </Key>
+          <Property Name="SOPClassID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UID" Type="nvarchar(max)" />
+          <Property Name="NumberOfInstances" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ValidLogs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Pri" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Version" Type="int" />
+          <Property Name="Timestamp" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HostName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AppName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ProcessID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MessageID" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StructuredData" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsDicomFormat" Type="bit" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Accession_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Accession" Type="Self.Accession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="Accession">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveParticipant_ActorElement">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="0..1" />
+          <End Role="ActiveParticipant" Type="Self.ActiveParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="ActiveParticipant">
+              <PropertyRef Name="RoleIDCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveParticipant_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLogs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ActiveParticipant" Type="Self.ActiveParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="ActiveParticipant">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AuditSourceIdentification_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLogs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AuditSourceIdentification" Type="Self.AuditSourceIdentification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="AuditSourceIdentification">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventIdentification_ActorElement_EventID">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="1" />
+          <End Role="EventIdentification" Type="Self.EventIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="EventIdentification">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventIdentification_ActorElement_EventTypeCodeID">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="0..1" />
+          <End Role="EventIdentification" Type="Self.EventIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="EventIdentification">
+              <PropertyRef Name="EventTypeCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventIdentification_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLogs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventIdentification" Type="Self.EventIdentification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="EventIdentification">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Instance_SOPClass">
+          <End Role="SOPClass" Type="Self.SOPClass" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Instance" Type="Self.Instance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOPClass">
+              <PropertyRef Name="SOPClassID" />
+            </Principal>
+            <Dependent Role="Instance">
+              <PropertyRef Name="SOPCLassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvalidLogs_LogRecorder1">
+          <End Role="LogRecorder" Type="Self.LogRecorder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvalidLogs" Type="Self.InvalidLogs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LogRecorder">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="InvalidLogs">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjectDetailElement_ParticipantObjectIdentification">
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ObjectDetailElement" Type="Self.ObjectDetailElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectIdentification">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Principal>
+            <Dependent Role="ObjectDetailElement">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjectIdentifier_ParticipantObjectContainsStudy">
+          <End Role="ParticipantObjectContainsStudy" Type="Self.ParticipantObjectContainsStudy" Multiplicity="0..1" />
+          <End Role="ObjectIdentifier" Type="Self.ObjectIdentifier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectContainsStudy">
+              <PropertyRef Name="ParticipantObjectContainsStudyID" />
+            </Principal>
+            <Dependent Role="ObjectIdentifier">
+              <PropertyRef Name="ParticipantObjectContainsStudyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjectIdentifier_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ObjectIdentifier" Type="Self.ObjectIdentifier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="ObjectIdentifier">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectContainsStudy_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParticipantObjectContainsStudy" Type="Self.ParticipantObjectContainsStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectContainsStudy">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectDescription_ParticipantObjectIdentification">
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectIdentification">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectIdentification_ActorElement">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="1" />
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectIdentification">
+              <PropertyRef Name="ParticipantObjectIDTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectIdentification_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLogs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectIdentification">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOPClass_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SOPClass" Type="Self.SOPClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="SOPClass">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidLogs_LogRecorder">
+          <End Role="LogRecorder" Type="Self.LogRecorder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidLogs" Type="Self.ValidLogs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LogRecorder">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PerceptiveARRModelStoreContainer">
+          <EntitySet Name="Accession" EntityType="Self.Accession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActiveParticipant" EntityType="Self.ActiveParticipant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActorElement" EntityType="Self.ActorElement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AuditSourceIdentification" EntityType="Self.AuditSourceIdentification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventIdentification" EntityType="Self.EventIdentification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Instance" EntityType="Self.Instance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvalidLogs" EntityType="Self.InvalidLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogRecorder" EntityType="Self.LogRecorder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ObjectDetailElement" EntityType="Self.ObjectDetailElement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ObjectIdentifier" EntityType="Self.ObjectIdentifier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParticipantObjectContainsStudy" EntityType="Self.ParticipantObjectContainsStudy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParticipantObjectDescription" EntityType="Self.ParticipantObjectDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ParticipantObjectIdentification" EntityType="Self.ParticipantObjectIdentification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SOPClass" EntityType="Self.SOPClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ValidLogs" EntityType="Self.ValidLogs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accession_ParticipantObjectDescription" Association="Self.FK_Accession_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescription" />
+            <End Role="Accession" EntitySet="Accession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveParticipant_ActorElement" Association="Self.FK_ActiveParticipant_ActorElement">
+            <End Role="ActorElement" EntitySet="ActorElement" />
+            <End Role="ActiveParticipant" EntitySet="ActiveParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveParticipant_ValidLogs" Association="Self.FK_ActiveParticipant_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="ActiveParticipant" EntitySet="ActiveParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AuditSourceIdentification_ValidLogs" Association="Self.FK_AuditSourceIdentification_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="AuditSourceIdentification" EntitySet="AuditSourceIdentification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventIdentification_ActorElement_EventID" Association="Self.FK_EventIdentification_ActorElement_EventID">
+            <End Role="ActorElement" EntitySet="ActorElement" />
+            <End Role="EventIdentification" EntitySet="EventIdentification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventIdentification_ActorElement_EventTypeCodeID" Association="Self.FK_EventIdentification_ActorElement_EventTypeCodeID">
+            <End Role="ActorElement" EntitySet="ActorElement" />
+            <End Role="EventIdentification" EntitySet="EventIdentification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventIdentification_ValidLogs" Association="Self.FK_EventIdentification_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="EventIdentification" EntitySet="EventIdentification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Instance_SOPClass" Association="Self.FK_Instance_SOPClass">
+            <End Role="SOPClass" EntitySet="SOPClass" />
+            <End Role="Instance" EntitySet="Instance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvalidLogs_LogRecorder1" Association="Self.FK_InvalidLogs_LogRecorder1">
+            <End Role="LogRecorder" EntitySet="LogRecorder" />
+            <End Role="InvalidLogs" EntitySet="InvalidLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjectDetailElement_ParticipantObjectIdentification" Association="Self.FK_ObjectDetailElement_ParticipantObjectIdentification">
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentification" />
+            <End Role="ObjectDetailElement" EntitySet="ObjectDetailElement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjectIdentifier_ParticipantObjectContainsStudy" Association="Self.FK_ObjectIdentifier_ParticipantObjectContainsStudy">
+            <End Role="ParticipantObjectContainsStudy" EntitySet="ParticipantObjectContainsStudy" />
+            <End Role="ObjectIdentifier" EntitySet="ObjectIdentifier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjectIdentifier_ParticipantObjectDescription" Association="Self.FK_ObjectIdentifier_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescription" />
+            <End Role="ObjectIdentifier" EntitySet="ObjectIdentifier" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectContainsStudy_ParticipantObjectDescription" Association="Self.FK_ParticipantObjectContainsStudy_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescription" />
+            <End Role="ParticipantObjectContainsStudy" EntitySet="ParticipantObjectContainsStudy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectDescription_ParticipantObjectIdentification" Association="Self.FK_ParticipantObjectDescription_ParticipantObjectIdentification">
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentification" />
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectIdentification_ActorElement" Association="Self.FK_ParticipantObjectIdentification_ActorElement">
+            <End Role="ActorElement" EntitySet="ActorElement" />
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectIdentification_ValidLogs" Association="Self.FK_ParticipantObjectIdentification_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOPClass_ParticipantObjectDescription" Association="Self.FK_SOPClass_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescription" />
+            <End Role="SOPClass" EntitySet="SOPClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidLogs_LogRecorder" Association="Self.FK_ValidLogs_LogRecorder">
+            <End Role="LogRecorder" EntitySet="LogRecorder" />
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PerceptiveARRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accession">
+          <Key>
+            <PropertyRef Name="AccessionID" />
+          </Key>
+          <Property Name="AccessionID" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="Guid" Nullable="false" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ParticipantObjectDescription" Relationship="Self.FK_Accession_ParticipantObjectDescription" FromRole="Accession" ToRole="ParticipantObjectDescription" />
+        </EntityType>
+        <EntityType Name="ActiveParticipant">
+          <Key>
+            <PropertyRef Name="ActiveParticipantID" />
+          </Key>
+          <Property Name="ActiveParticipantID" Type="Guid" Nullable="false" />
+          <Property Name="LogID" Type="Guid" Nullable="false" />
+          <Property Name="UserID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AlternativeUserID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserIsRequestor" Type="Boolean" Nullable="false" />
+          <Property Name="RoleIDCode" Type="Guid" />
+          <Property Name="NetworkAccessPointTypeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NetworkAccesPointID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActorElement" Relationship="Self.FK_ActiveParticipant_ActorElement" FromRole="ActiveParticipant" ToRole="ActorElement" />
+          <NavigationProperty Name="ValidLog" Relationship="Self.FK_ActiveParticipant_ValidLogs" FromRole="ActiveParticipant" ToRole="ValidLogs" />
+        </EntityType>
+        <EntityType Name="ActorElement">
+          <Key>
+            <PropertyRef Name="ActorElementID" />
+          </Key>
+          <Property Name="ActorElementID" Type="Guid" Nullable="false" />
+          <Property Name="ActorElementTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodeSystemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActiveParticipants" Relationship="Self.FK_ActiveParticipant_ActorElement" FromRole="ActorElement" ToRole="ActiveParticipant" />
+          <NavigationProperty Name="EventIdentifications" Relationship="Self.FK_EventIdentification_ActorElement_EventID" FromRole="ActorElement" ToRole="EventIdentification" />
+          <NavigationProperty Name="EventIdentifications1" Relationship="Self.FK_EventIdentification_ActorElement_EventTypeCodeID" FromRole="ActorElement" ToRole="EventIdentification" />
+          <NavigationProperty Name="ParticipantObjectIdentifications" Relationship="Self.FK_ParticipantObjectIdentification_ActorElement" FromRole="ActorElement" ToRole="ParticipantObjectIdentification" />
+        </EntityType>
+        <EntityType Name="AuditSourceIdentification">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Guid" Nullable="false" />
+          <Property Name="AuditSourceID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AuditEnterpriseSiteID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodeSystemName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ValidLog" Relationship="Self.FK_AuditSourceIdentification_ValidLogs" FromRole="AuditSourceIdentification" ToRole="ValidLogs" />
+        </EntityType>
+        <EntityType Name="EventIdentification">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Guid" Nullable="false" />
+          <Property Name="EventID" Type="Guid" Nullable="false" />
+          <Property Name="EventActionCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EventDateTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EventOutcomeIndicator" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EventTypeCodeID" Type="Guid" />
+          <NavigationProperty Name="ActorElement" Relationship="Self.FK_EventIdentification_ActorElement_EventID" FromRole="EventIdentification" ToRole="ActorElement" />
+          <NavigationProperty Name="ActorElement1" Relationship="Self.FK_EventIdentification_ActorElement_EventTypeCodeID" FromRole="EventIdentification" ToRole="ActorElement" />
+          <NavigationProperty Name="ValidLog" Relationship="Self.FK_EventIdentification_ValidLogs" FromRole="EventIdentification" ToRole="ValidLogs" />
+        </EntityType>
+        <EntityType Name="Instance">
+          <Key>
+            <PropertyRef Name="InstanceID" />
+          </Key>
+          <Property Name="InstanceID" Type="Guid" Nullable="false" />
+          <Property Name="SOPCLassID" Type="Guid" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SOPClass" Relationship="Self.FK_Instance_SOPClass" FromRole="Instance" ToRole="SOPClass" />
+        </EntityType>
+        <EntityType Name="InvalidLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Guid" Nullable="false" />
+          <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <NavigationProperty Name="LogRecorder" Relationship="Self.FK_InvalidLogs_LogRecorder1" FromRole="InvalidLogs" ToRole="LogRecorder" />
+        </EntityType>
+        <EntityType Name="LogRecorder">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Guid" Nullable="false" />
+          <Property Name="RemoteIP" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LogDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LogType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsValid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InvalidLog" Relationship="Self.FK_InvalidLogs_LogRecorder1" FromRole="LogRecorder" ToRole="InvalidLogs" />
+          <NavigationProperty Name="ValidLog" Relationship="Self.FK_ValidLogs_LogRecorder" FromRole="LogRecorder" ToRole="ValidLogs" />
+        </EntityType>
+        <EntityType Name="ObjectDetailElement">
+          <Key>
+            <PropertyRef Name="ObjectDetailElementID" />
+          </Key>
+          <Property Name="ObjectDetailElementID" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectIdentificationID" Type="Guid" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ParticipantObjectIdentification" Relationship="Self.FK_ObjectDetailElement_ParticipantObjectIdentification" FromRole="ObjectDetailElement" ToRole="ParticipantObjectIdentification" />
+        </EntityType>
+        <EntityType Name="ObjectIdentifier">
+          <Key>
+            <PropertyRef Name="ObjectIdentifierID" />
+          </Key>
+          <Property Name="ObjectIdentifierID" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="Guid" />
+          <Property Name="ParticipantObjectContainsStudyID" Type="Guid" />
+          <Property Name="ObjectIdentifierType" Type="Int32" Nullable="false" />
+          <Property Name="UID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ParticipantObjectContainsStudy" Relationship="Self.FK_ObjectIdentifier_ParticipantObjectContainsStudy" FromRole="ObjectIdentifier" ToRole="ParticipantObjectContainsStudy" />
+          <NavigationProperty Name="ParticipantObjectDescription" Relationship="Self.FK_ObjectIdentifier_ParticipantObjectDescription" FromRole="ObjectIdentifier" ToRole="ParticipantObjectDescription" />
+        </EntityType>
+        <EntityType Name="ParticipantObjectContainsStudy">
+          <Key>
+            <PropertyRef Name="ParticipantObjectContainsStudyID" />
+          </Key>
+          <Property Name="ParticipantObjectContainsStudyID" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="ObjectIdentifiers" Relationship="Self.FK_ObjectIdentifier_ParticipantObjectContainsStudy" FromRole="ParticipantObjectContainsStudy" ToRole="ObjectIdentifier" />
+          <NavigationProperty Name="ParticipantObjectDescription" Relationship="Self.FK_ParticipantObjectContainsStudy_ParticipantObjectDescription" FromRole="ParticipantObjectContainsStudy" ToRole="ParticipantObjectDescription" />
+        </EntityType>
+        <EntityType Name="ParticipantObjectDescription">
+          <Key>
+            <PropertyRef Name="ParticipantObjectDescriptionID" />
+          </Key>
+          <Property Name="ParticipantObjectDescriptionID" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectIdentificationID" Type="Guid" Nullable="false" />
+          <Property Name="Encrypted" Type="Boolean" />
+          <Property Name="Anonymized" Type="Boolean" />
+          <NavigationProperty Name="Accessions" Relationship="Self.FK_Accession_ParticipantObjectDescription" FromRole="ParticipantObjectDescription" ToRole="Accession" />
+          <NavigationProperty Name="ObjectIdentifiers" Relationship="Self.FK_ObjectIdentifier_ParticipantObjectDescription" FromRole="ParticipantObjectDescription" ToRole="ObjectIdentifier" />
+          <NavigationProperty Name="ParticipantObjectContainsStudies" Relationship="Self.FK_ParticipantObjectContainsStudy_ParticipantObjectDescription" FromRole="ParticipantObjectDescription" ToRole="ParticipantObjectContainsStudy" />
+          <NavigationProperty Name="ParticipantObjectIdentification" Relationship="Self.FK_ParticipantObjectDescription_ParticipantObjectIdentification" FromRole="ParticipantObjectDescription" ToRole="ParticipantObjectIdentification" />
+          <NavigationProperty Name="SOPClasses" Relationship="Self.FK_SOPClass_ParticipantObjectDescription" FromRole="ParticipantObjectDescription" ToRole="SOPClass" />
+        </EntityType>
+        <EntityType Name="ParticipantObjectIdentification">
+          <Key>
+            <PropertyRef Name="ParticipantObjectIdentificationID" />
+          </Key>
+          <Property Name="ParticipantObjectIdentificationID" Type="Guid" Nullable="false" />
+          <Property Name="LogID" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectTypeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantObjectTypeCodeRole" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantObjectDataLifeCycle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantObjectIDTypeCode" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectSensitivity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantObjectID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantObjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipantObjectQuery" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActorElement" Relationship="Self.FK_ParticipantObjectIdentification_ActorElement" FromRole="ParticipantObjectIdentification" ToRole="ActorElement" />
+          <NavigationProperty Name="ObjectDetailElements" Relationship="Self.FK_ObjectDetailElement_ParticipantObjectIdentification" FromRole="ParticipantObjectIdentification" ToRole="ObjectDetailElement" />
+          <NavigationProperty Name="ParticipantObjectDescriptions" Relationship="Self.FK_ParticipantObjectDescription_ParticipantObjectIdentification" FromRole="ParticipantObjectIdentification" ToRole="ParticipantObjectDescription" />
+          <NavigationProperty Name="ValidLog" Relationship="Self.FK_ParticipantObjectIdentification_ValidLogs" FromRole="ParticipantObjectIdentification" ToRole="ValidLogs" />
+        </EntityType>
+        <EntityType Name="SOPClass">
+          <Key>
+            <PropertyRef Name="SOPClassID" />
+          </Key>
+          <Property Name="SOPClassID" Type="Guid" Nullable="false" />
+          <Property Name="ParticipantObjectDescriptionID" Type="Guid" Nullable="false" />
+          <Property Name="UID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfInstances" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Instances" Relationship="Self.FK_Instance_SOPClass" FromRole="SOPClass" ToRole="Instance" />
+          <NavigationProperty Name="ParticipantObjectDescription" Relationship="Self.FK_SOPClass_ParticipantObjectDescription" FromRole="SOPClass" ToRole="ParticipantObjectDescription" />
+        </EntityType>
+        <EntityType Name="ValidLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Guid" Nullable="false" />
+          <Property Name="Pri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Version" Type="Int32" />
+          <Property Name="Timestamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HostName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AppName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProcessID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MessageID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StructuredData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDicomFormat" Type="Boolean" Nullable="false" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ActiveParticipants" Relationship="Self.FK_ActiveParticipant_ValidLogs" FromRole="ValidLogs" ToRole="ActiveParticipant" />
+          <NavigationProperty Name="AuditSourceIdentification" Relationship="Self.FK_AuditSourceIdentification_ValidLogs" FromRole="ValidLogs" ToRole="AuditSourceIdentification" />
+          <NavigationProperty Name="EventIdentification" Relationship="Self.FK_EventIdentification_ValidLogs" FromRole="ValidLogs" ToRole="EventIdentification" />
+          <NavigationProperty Name="LogRecorder" Relationship="Self.FK_ValidLogs_LogRecorder" FromRole="ValidLogs" ToRole="LogRecorder" />
+          <NavigationProperty Name="ParticipantObjectIdentifications" Relationship="Self.FK_ParticipantObjectIdentification_ValidLogs" FromRole="ValidLogs" ToRole="ParticipantObjectIdentification" />
+        </EntityType>
+        <Association Name="FK_Accession_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Accession" Type="Self.Accession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="Accession">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveParticipant_ActorElement">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="0..1" />
+          <End Role="ActiveParticipant" Type="Self.ActiveParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="ActiveParticipant">
+              <PropertyRef Name="RoleIDCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveParticipant_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ActiveParticipant" Type="Self.ActiveParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="ActiveParticipant">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventIdentification_ActorElement_EventID">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="1" />
+          <End Role="EventIdentification" Type="Self.EventIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="EventIdentification">
+              <PropertyRef Name="EventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventIdentification_ActorElement_EventTypeCodeID">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="0..1" />
+          <End Role="EventIdentification" Type="Self.EventIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="EventIdentification">
+              <PropertyRef Name="EventTypeCodeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectIdentification_ActorElement">
+          <End Role="ActorElement" Type="Self.ActorElement" Multiplicity="1" />
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActorElement">
+              <PropertyRef Name="ActorElementID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectIdentification">
+              <PropertyRef Name="ParticipantObjectIDTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AuditSourceIdentification_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AuditSourceIdentification" Type="Self.AuditSourceIdentification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="AuditSourceIdentification">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventIdentification_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EventIdentification" Type="Self.EventIdentification" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="EventIdentification">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Instance_SOPClass">
+          <End Role="SOPClass" Type="Self.SOPClass" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Instance" Type="Self.Instance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOPClass">
+              <PropertyRef Name="SOPClassID" />
+            </Principal>
+            <Dependent Role="Instance">
+              <PropertyRef Name="SOPCLassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InvalidLogs_LogRecorder1">
+          <End Role="LogRecorder" Type="Self.LogRecorder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InvalidLogs" Type="Self.InvalidLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LogRecorder">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="InvalidLogs">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ValidLogs_LogRecorder">
+          <End Role="LogRecorder" Type="Self.LogRecorder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ValidLogs" Type="Self.ValidLog" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="LogRecorder">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjectDetailElement_ParticipantObjectIdentification">
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ObjectDetailElement" Type="Self.ObjectDetailElement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectIdentification">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Principal>
+            <Dependent Role="ObjectDetailElement">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjectIdentifier_ParticipantObjectContainsStudy">
+          <End Role="ParticipantObjectContainsStudy" Type="Self.ParticipantObjectContainsStudy" Multiplicity="0..1" />
+          <End Role="ObjectIdentifier" Type="Self.ObjectIdentifier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectContainsStudy">
+              <PropertyRef Name="ParticipantObjectContainsStudyID" />
+            </Principal>
+            <Dependent Role="ObjectIdentifier">
+              <PropertyRef Name="ParticipantObjectContainsStudyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ObjectIdentifier_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ObjectIdentifier" Type="Self.ObjectIdentifier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="ObjectIdentifier">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectContainsStudy_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParticipantObjectContainsStudy" Type="Self.ParticipantObjectContainsStudy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectContainsStudy">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectDescription_ParticipantObjectIdentification">
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectIdentification">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectIdentificationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOPClass_ParticipantObjectDescription">
+          <End Role="ParticipantObjectDescription" Type="Self.ParticipantObjectDescription" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SOPClass" Type="Self.SOPClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ParticipantObjectDescription">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Principal>
+            <Dependent Role="SOPClass">
+              <PropertyRef Name="ParticipantObjectDescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ParticipantObjectIdentification_ValidLogs">
+          <End Role="ValidLogs" Type="Self.ValidLog" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ParticipantObjectIdentification" Type="Self.ParticipantObjectIdentification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ValidLogs">
+              <PropertyRef Name="LogID" />
+            </Principal>
+            <Dependent Role="ParticipantObjectIdentification">
+              <PropertyRef Name="LogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accessions" EntityType="Self.Accession" />
+          <EntitySet Name="ActiveParticipants" EntityType="Self.ActiveParticipant" />
+          <EntitySet Name="ActorElements" EntityType="Self.ActorElement" />
+          <EntitySet Name="AuditSourceIdentifications" EntityType="Self.AuditSourceIdentification" />
+          <EntitySet Name="EventIdentifications" EntityType="Self.EventIdentification" />
+          <EntitySet Name="Instances" EntityType="Self.Instance" />
+          <EntitySet Name="InvalidLogs" EntityType="Self.InvalidLog" />
+          <EntitySet Name="LogRecorders" EntityType="Self.LogRecorder" />
+          <EntitySet Name="ObjectDetailElements" EntityType="Self.ObjectDetailElement" />
+          <EntitySet Name="ObjectIdentifiers" EntityType="Self.ObjectIdentifier" />
+          <EntitySet Name="ParticipantObjectContainsStudies" EntityType="Self.ParticipantObjectContainsStudy" />
+          <EntitySet Name="ParticipantObjectDescriptions" EntityType="Self.ParticipantObjectDescription" />
+          <EntitySet Name="ParticipantObjectIdentifications" EntityType="Self.ParticipantObjectIdentification" />
+          <EntitySet Name="SOPClasses" EntityType="Self.SOPClass" />
+          <EntitySet Name="ValidLogs" EntityType="Self.ValidLog" />
+          <AssociationSet Name="FK_Accession_ParticipantObjectDescription" Association="Self.FK_Accession_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescriptions" />
+            <End Role="Accession" EntitySet="Accessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveParticipant_ActorElement" Association="Self.FK_ActiveParticipant_ActorElement">
+            <End Role="ActorElement" EntitySet="ActorElements" />
+            <End Role="ActiveParticipant" EntitySet="ActiveParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveParticipant_ValidLogs" Association="Self.FK_ActiveParticipant_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="ActiveParticipant" EntitySet="ActiveParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventIdentification_ActorElement_EventID" Association="Self.FK_EventIdentification_ActorElement_EventID">
+            <End Role="ActorElement" EntitySet="ActorElements" />
+            <End Role="EventIdentification" EntitySet="EventIdentifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventIdentification_ActorElement_EventTypeCodeID" Association="Self.FK_EventIdentification_ActorElement_EventTypeCodeID">
+            <End Role="ActorElement" EntitySet="ActorElements" />
+            <End Role="EventIdentification" EntitySet="EventIdentifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectIdentification_ActorElement" Association="Self.FK_ParticipantObjectIdentification_ActorElement">
+            <End Role="ActorElement" EntitySet="ActorElements" />
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AuditSourceIdentification_ValidLogs" Association="Self.FK_AuditSourceIdentification_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="AuditSourceIdentification" EntitySet="AuditSourceIdentifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventIdentification_ValidLogs" Association="Self.FK_EventIdentification_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="EventIdentification" EntitySet="EventIdentifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Instance_SOPClass" Association="Self.FK_Instance_SOPClass">
+            <End Role="SOPClass" EntitySet="SOPClasses" />
+            <End Role="Instance" EntitySet="Instances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InvalidLogs_LogRecorder1" Association="Self.FK_InvalidLogs_LogRecorder1">
+            <End Role="LogRecorder" EntitySet="LogRecorders" />
+            <End Role="InvalidLogs" EntitySet="InvalidLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ValidLogs_LogRecorder" Association="Self.FK_ValidLogs_LogRecorder">
+            <End Role="LogRecorder" EntitySet="LogRecorders" />
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjectDetailElement_ParticipantObjectIdentification" Association="Self.FK_ObjectDetailElement_ParticipantObjectIdentification">
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentifications" />
+            <End Role="ObjectDetailElement" EntitySet="ObjectDetailElements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjectIdentifier_ParticipantObjectContainsStudy" Association="Self.FK_ObjectIdentifier_ParticipantObjectContainsStudy">
+            <End Role="ParticipantObjectContainsStudy" EntitySet="ParticipantObjectContainsStudies" />
+            <End Role="ObjectIdentifier" EntitySet="ObjectIdentifiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ObjectIdentifier_ParticipantObjectDescription" Association="Self.FK_ObjectIdentifier_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescriptions" />
+            <End Role="ObjectIdentifier" EntitySet="ObjectIdentifiers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectContainsStudy_ParticipantObjectDescription" Association="Self.FK_ParticipantObjectContainsStudy_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescriptions" />
+            <End Role="ParticipantObjectContainsStudy" EntitySet="ParticipantObjectContainsStudies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectDescription_ParticipantObjectIdentification" Association="Self.FK_ParticipantObjectDescription_ParticipantObjectIdentification">
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentifications" />
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOPClass_ParticipantObjectDescription" Association="Self.FK_SOPClass_ParticipantObjectDescription">
+            <End Role="ParticipantObjectDescription" EntitySet="ParticipantObjectDescriptions" />
+            <End Role="SOPClass" EntitySet="SOPClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ParticipantObjectIdentification_ValidLogs" Association="Self.FK_ParticipantObjectIdentification_ValidLogs">
+            <End Role="ValidLogs" EntitySet="ValidLogs" />
+            <End Role="ParticipantObjectIdentification" EntitySet="ParticipantObjectIdentifications" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PerceptiveARRModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Accessions">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.Accession">
+              <MappingFragment StoreEntitySet="Accession">
+                <ScalarProperty Name="AccessionID" ColumnName="AccessionID" />
+                <ScalarProperty Name="ParticipantObjectDescriptionID" ColumnName="ParticipantObjectDescriptionID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveParticipants">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ActiveParticipant">
+              <MappingFragment StoreEntitySet="ActiveParticipant">
+                <ScalarProperty Name="ActiveParticipantID" ColumnName="ActiveParticipantID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="AlternativeUserID" ColumnName="AlternativeUserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserIsRequestor" ColumnName="UserIsRequestor" />
+                <ScalarProperty Name="RoleIDCode" ColumnName="RoleIDCode" />
+                <ScalarProperty Name="NetworkAccessPointTypeCode" ColumnName="NetworkAccessPointTypeCode" />
+                <ScalarProperty Name="NetworkAccesPointID" ColumnName="NetworkAccesPointID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActorElements">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ActorElement">
+              <MappingFragment StoreEntitySet="ActorElement">
+                <ScalarProperty Name="ActorElementID" ColumnName="ActorElementID" />
+                <ScalarProperty Name="ActorElementTypeID" ColumnName="ActorElementTypeID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CodeSystemName" ColumnName="CodeSystemName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditSourceIdentifications">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.AuditSourceIdentification">
+              <MappingFragment StoreEntitySet="AuditSourceIdentification">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="AuditSourceID" ColumnName="AuditSourceID" />
+                <ScalarProperty Name="AuditEnterpriseSiteID" ColumnName="AuditEnterpriseSiteID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CodeSystemName" ColumnName="CodeSystemName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventIdentifications">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.EventIdentification">
+              <MappingFragment StoreEntitySet="EventIdentification">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventActionCode" ColumnName="EventActionCode" />
+                <ScalarProperty Name="EventDateTime" ColumnName="EventDateTime" />
+                <ScalarProperty Name="EventOutcomeIndicator" ColumnName="EventOutcomeIndicator" />
+                <ScalarProperty Name="EventTypeCodeID" ColumnName="EventTypeCodeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instances">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.Instance">
+              <MappingFragment StoreEntitySet="Instance">
+                <ScalarProperty Name="InstanceID" ColumnName="InstanceID" />
+                <ScalarProperty Name="SOPCLassID" ColumnName="SOPCLassID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvalidLogs">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.InvalidLog">
+              <MappingFragment StoreEntitySet="InvalidLogs">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogRecorders">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.LogRecorder">
+              <MappingFragment StoreEntitySet="LogRecorder">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="RemoteIP" ColumnName="RemoteIP" />
+                <ScalarProperty Name="LogDateTime" ColumnName="LogDateTime" />
+                <ScalarProperty Name="LogType" ColumnName="LogType" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObjectDetailElements">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ObjectDetailElement">
+              <MappingFragment StoreEntitySet="ObjectDetailElement">
+                <ScalarProperty Name="ObjectDetailElementID" ColumnName="ObjectDetailElementID" />
+                <ScalarProperty Name="ParticipantObjectIdentificationID" ColumnName="ParticipantObjectIdentificationID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ObjectIdentifiers">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ObjectIdentifier">
+              <MappingFragment StoreEntitySet="ObjectIdentifier">
+                <ScalarProperty Name="ObjectIdentifierID" ColumnName="ObjectIdentifierID" />
+                <ScalarProperty Name="ParticipantObjectDescriptionID" ColumnName="ParticipantObjectDescriptionID" />
+                <ScalarProperty Name="ParticipantObjectContainsStudyID" ColumnName="ParticipantObjectContainsStudyID" />
+                <ScalarProperty Name="ObjectIdentifierType" ColumnName="ObjectIdentifierType" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParticipantObjectContainsStudies">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ParticipantObjectContainsStudy">
+              <MappingFragment StoreEntitySet="ParticipantObjectContainsStudy">
+                <ScalarProperty Name="ParticipantObjectContainsStudyID" ColumnName="ParticipantObjectContainsStudyID" />
+                <ScalarProperty Name="ParticipantObjectDescriptionID" ColumnName="ParticipantObjectDescriptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParticipantObjectDescriptions">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ParticipantObjectDescription">
+              <MappingFragment StoreEntitySet="ParticipantObjectDescription">
+                <ScalarProperty Name="ParticipantObjectDescriptionID" ColumnName="ParticipantObjectDescriptionID" />
+                <ScalarProperty Name="ParticipantObjectIdentificationID" ColumnName="ParticipantObjectIdentificationID" />
+                <ScalarProperty Name="Encrypted" ColumnName="Encrypted" />
+                <ScalarProperty Name="Anonymized" ColumnName="Anonymized" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ParticipantObjectIdentifications">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ParticipantObjectIdentification">
+              <MappingFragment StoreEntitySet="ParticipantObjectIdentification">
+                <ScalarProperty Name="ParticipantObjectIdentificationID" ColumnName="ParticipantObjectIdentificationID" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="ParticipantObjectTypeCode" ColumnName="ParticipantObjectTypeCode" />
+                <ScalarProperty Name="ParticipantObjectTypeCodeRole" ColumnName="ParticipantObjectTypeCodeRole" />
+                <ScalarProperty Name="ParticipantObjectDataLifeCycle" ColumnName="ParticipantObjectDataLifeCycle" />
+                <ScalarProperty Name="ParticipantObjectIDTypeCode" ColumnName="ParticipantObjectIDTypeCode" />
+                <ScalarProperty Name="ParticipantObjectSensitivity" ColumnName="ParticipantObjectSensitivity" />
+                <ScalarProperty Name="ParticipantObjectID" ColumnName="ParticipantObjectID" />
+                <ScalarProperty Name="ParticipantObjectName" ColumnName="ParticipantObjectName" />
+                <ScalarProperty Name="ParticipantObjectQuery" ColumnName="ParticipantObjectQuery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOPClasses">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.SOPClass">
+              <MappingFragment StoreEntitySet="SOPClass">
+                <ScalarProperty Name="SOPClassID" ColumnName="SOPClassID" />
+                <ScalarProperty Name="ParticipantObjectDescriptionID" ColumnName="ParticipantObjectDescriptionID" />
+                <ScalarProperty Name="UID" ColumnName="UID" />
+                <ScalarProperty Name="NumberOfInstances" ColumnName="NumberOfInstances" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ValidLogs">
+            <EntityTypeMapping TypeName="PerceptiveARRModel.ValidLog">
+              <MappingFragment StoreEntitySet="ValidLogs">
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="Pri" ColumnName="Pri" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="HostName" ColumnName="HostName" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="StructuredData" ColumnName="StructuredData" />
+                <ScalarProperty Name="IsDicomFormat" ColumnName="IsDicomFormat" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

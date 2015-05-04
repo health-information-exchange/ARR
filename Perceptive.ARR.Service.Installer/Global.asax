@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.cs" Inherits="Perceptive.ARR.Service.Installer.Global" Language="C#" %>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd34bddcbb214c9096b982be4517b1e1" Name="Diagram1">
+        <EntityTypeShape EntityType="PerceptiveARRModel.Accession" Width="1.5" PointX="12.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ActiveParticipant" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ActorElement" Width="1.5" PointX="6" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.AuditSourceIdentification" Width="1.5" PointX="5.25" PointY="19" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.EventIdentification" Width="1.5" PointX="8.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.Instance" Width="1.5" PointX="15" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.InvalidLog" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.LogRecorder" Width="1.5" PointX="0.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ObjectDetailElement" Width="1.5" PointX="10.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ObjectIdentifier" Width="1.5" PointX="15" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ParticipantObjectContainsStudy" Width="1.5" PointX="12.75" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ParticipantObjectDescription" Width="1.5" PointX="10.5" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ParticipantObjectIdentification" Width="1.5" PointX="8.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.SOPClass" Width="1.5" PointX="12.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PerceptiveARRModel.ValidLog" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_Accession_ParticipantObjectDescription" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ActiveParticipant_ActorElement" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ActiveParticipant_ValidLogs" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_EventIdentification_ActorElement_EventID" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_EventIdentification_ActorElement_EventTypeCodeID" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ParticipantObjectIdentification_ActorElement" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_AuditSourceIdentification_ValidLogs" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_EventIdentification_ValidLogs" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_Instance_SOPClass" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_InvalidLogs_LogRecorder1" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ValidLogs_LogRecorder" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ObjectDetailElement_ParticipantObjectIdentification" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ObjectIdentifier_ParticipantObjectContainsStudy" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ObjectIdentifier_ParticipantObjectDescription" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ParticipantObjectContainsStudy_ParticipantObjectDescription" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ParticipantObjectDescription_ParticipantObjectIdentification" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_SOPClass_ParticipantObjectDescription" ManuallyRouted="false" />
+        <AssociationConnector Association="PerceptiveARRModel.FK_ParticipantObjectIdentification_ValidLogs" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
